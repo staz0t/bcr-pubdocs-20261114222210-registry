@@ -1,0 +1,16 @@
+name: Validate reviewed documentation
+on:
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  validate-reviewed-docs:
+    name: validate-reviewed-docs
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - run: python3 tools/validate_docs.py origin/main
